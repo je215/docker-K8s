@@ -13,8 +13,11 @@ router.get("/", (req, res) => {
 router.use("/todos", todos);
 // use other routes here
 router.use('/users', users) 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 0166a6d (.)
 
 module.exports = router;
