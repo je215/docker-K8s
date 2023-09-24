@@ -1,23 +1,22 @@
-# Use an official Node.js runtime as the base image
+# Use an official Node.js runtime as a parent image
 FROM node:14-alpine
-# Set the working directory inside the container
+
+# Set the working directory in the container
 WORKDIR /app
-# Copy package.json and package-lock.json to the container
+
+# Copy the package.json and package-lock.json to the working directory
 COPY package*.json ./
-# Install dependencies
+
+# Install project dependencies
 RUN npm install
-# Copy the backend source code to the container
+RUN npm install cors
+RUN npm install -g nodemon
+# Copy the rest of your application code to the working directory
 COPY . .
-# Expose the port the Express app runs on
+
+# Expose the port that your Node.js application will listen on
 EXPOSE 3001
-# Start the Express app
-CMD ["node", "server.js"]
 
-#FROM node:10-alpine
-#WORKDIR /app
-#COPY package*.json ./
-#RUN npm install
-#COPY . .
-#EXPOSE 3001
-#CMD ["node", "server.js"]
-
+# Command to start your Node.js application
+#CMD ["npm", "start"]
+CMD ["nodemon", "start"]
